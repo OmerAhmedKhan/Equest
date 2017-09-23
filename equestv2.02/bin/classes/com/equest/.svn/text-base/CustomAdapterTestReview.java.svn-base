@@ -1,0 +1,198 @@
+//package com.equest;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//import org.apache.http.NameValuePair;
+//import org.apache.http.message.BasicNameValuePair;
+//import org.json.JSONArray;
+//import org.json.JSONException;
+//import org.json.JSONObject;
+//
+//import android.app.Activity;
+//import android.app.ProgressDialog;
+//import android.content.Context;
+//import android.os.AsyncTask;
+//import android.os.Bundle;
+//import android.util.Log;
+//import android.view.LayoutInflater;
+//import android.view.View;
+//import android.view.ViewGroup;
+//import android.widget.BaseAdapter;
+//import android.widget.ImageView;
+//import android.widget.ListView;
+//import android.widget.TextView;
+//
+//public class CustomAdapterTestReview extends Activity{
+//	private Context context;
+//	AdapterClass adapter=new AdapterClass();
+//	
+//	ListView list;
+//	ArrayList<AdapterClass> adapterquestions;
+//	
+//	
+//	
+//	TempListAdapter tempListAdapter;
+//	
+//	@Override
+//	protected void onCreate(Bundle savedInstanceState) {
+//		super.onCreate(savedInstanceState);
+//		//setContentView(R.layout.test_review);
+//		context = this;
+//		adapterquestions = new ArrayList<AdapterClass>();
+//		//list = (ListView) findViewById(R.id.test_review_listview_id);
+//		
+//		new ProductsAsyncTask().execute();
+//		
+//	}
+//	
+//	public class ProductsAsyncTask extends AsyncTask<Void, Void, String> {
+//		private ProgressDialog progressDialog;
+//		
+//		@Override
+//		protected void onPreExecute() {
+//			super.onPreExecute();
+//			progressDialog = new ProgressDialog(context);
+//			progressDialog.setCancelable(false);
+//			progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+//			progressDialog.setCanceledOnTouchOutside(false);
+//			progressDialog.setMessage("Loading...");
+//			progressDialog.show();
+//		}
+//
+//		@Override
+//		protected String doInBackground(Void... params) {
+//			
+//			List<NameValuePair> pairs = new ArrayList<NameValuePair>();
+//			pairs.add(new BasicNameValuePair("email", "abc@example.com"));
+//			pairs.add(new BasicNameValuePair("password", "1234"));
+//			pairs.add(new BasicNameValuePair("functionName", "report_first_activity"));
+//			
+//			//pairs.add(new BasicNameValuePair("type", "tick"));
+//			return Network.makeHttpRequest(context, "http://192.175.0.138/interns/library/models/api.php", "POST", pairs).toString();
+//		
+////			for(int i = 0; i < adapter.length(); i++){
+////				JSONObject c = adapter.getJSONObject(i);
+////				
+//		
+//		
+//		}
+//
+//		@Override
+//		protected void onPostExecute(String result) {
+//			super.onPostExecute(result);
+//			Log.e("result", result);
+//			
+//			try {
+//				JSONObject jObject = new JSONObject(result);
+//				JSONArray jArray = jObject.getJSONObject("body").getJSONArray("questions");
+//					
+//				//	Log.e("result", jObject.getJSONObject("body").toString());
+//				
+//				
+////				adapterquestions.add(adapter);
+//				
+//					//temperature.add(jArray.getString("first_name"));
+//				
+//				//{"code":0,"message":"Success!","user information":{"id":"1","first_name":"omer","last_name":"ahmed","score":"1"}}
+//			//	tempListAdapter = new TempListAdapter(context, temperature);
+//				list.setAdapter(tempListAdapter);
+//			} catch (JSONException e) {
+//				e.printStackTrace();
+//			}
+//			
+//			
+//			if(progressDialog!=null && progressDialog.isShowing())
+//				progressDialog.dismiss();
+//		}
+//	}
+//	
+//	
+////	public class TempListAdapter extends BaseAdapter {
+////		private Context context;
+//		private ArrayList<String> arrayList;
+//
+//		public TempListAdapter(Context c, ArrayList<String> arrayList) {
+//			context = c;
+//			this.arrayList = arrayList;
+//		}
+//
+//		public int getCount() {
+//			return arrayList.size();
+//		}
+//
+//		public Object getItem(int position) {
+//			return arrayList.get(position);
+//		}
+//
+//		public long getItemId(int position) {
+//			return 0;
+////		}
+//////
+////		public View getView(int position, View convertView, ViewGroup parent) {
+////			LayoutInflater inflater = (LayoutInflater) context
+////					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+////			View row;
+////			ViewHolder viewHolder;
+////			if (convertView == null) {
+////				row = inflater.inflate(R.layout.review_row, null);
+////				viewHolder = new ViewHolder();
+////				viewHolder.question = (TextView) row.findViewById(R.id.test_review_txtview_question);
+////				viewHolder.Attempted = (TextView) row.findViewById(R.id.test_review_txtview_AttemptedAnswer);
+////				viewHolder.Answer = (TextView) row.findViewById(R.id.test_review_txtview_Answer);
+////				viewHolder.QuestionImage = (ImageView) row.findViewById(R.id.test_review_imageview_questionimage);
+////				viewHolder.AttemptedAnswerImage = (ImageView) row.findViewById(R.id.test_review_imageview_answerimage);
+////				viewHolder.CorrectWrong = (ImageView) row.findViewById(R.id.test_review_imageview_correctwrong);
+////				
+////				//test_review_imageview_answerimage dynamic answer walu image 
+////				
+////				//test_review_imageview_correctwrong correct or wrong answer image 
+////				
+////				
+////				row.setTag(viewHolder);
+////			} else {
+////				row = convertView;
+////				viewHolder = (ViewHolder) convertView.getTag();
+////			}
+//
+////			viewHolder.question.setText(arrayList.get(position));
+//			
+////			//((TextView)row.findViewById(R.id.test_review_txtview_At
+////					temptedAnswer))
+////		/	.setText(arrayList.get(position));
+//			
+//			((TextView)row.findViewById(R.id.test_review_txtview_Answer))
+//			.setText(arrayList.get(position));
+//			
+//			((TextView)row.findViewById(R.id.test_review_imageview_questionimage))
+//			.setText(arrayList.get(position));
+//			
+//			((TextView)row.findViewById(R.id.test_review_imageview_answerimage))
+//			.setText(arrayList.get(position));
+//			
+//			((TextView)row.findViewById(R.id.test_review_imageview_correctwrong))
+//			.setText(arrayList.get(position));
+//
+//
+//			
+//			return row;
+//		}
+//		
+//		//
+//
+//		class ViewHolder {
+//			TextView question;
+//			TextView Attempted;
+//			TextView Answer;
+//			ImageView QuestionImage; //question na paasey walu image 
+//			ImageView AttemptedAnswerImage;//dynamic answer walu image 
+//			ImageView CorrectWrong;
+//		
+//			
+//			
+//		}
+//	}
+//	
+//	
+//
+//}//CustomAdapterTestReview ends

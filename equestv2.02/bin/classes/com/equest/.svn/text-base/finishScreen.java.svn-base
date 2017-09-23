@@ -1,0 +1,89 @@
+package com.equest;
+
+import java.util.Arrays;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+
+import android.widget.Button;
+
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+
+import com.constants.constants;
+
+public class finishScreen extends Activity {
+	TextView timerOnFinish;
+	Intent onFinishTimer;
+	Bundle message;
+	String messageFromQuestionActivity;
+
+	
+	
+	
+
+	Button finish;
+	String questionsIDs,answeredIds,isCorrectIds;
+
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.finis_screen);
+		if (!constants.isFinished) {
+			onFinishTimer = this.getIntent();
+			message = onFinishTimer.getExtras();
+			messageFromQuestionActivity = (String) message
+					.get("timer_finished");
+			timerOnFinish = (TextView) findViewById(R.id.tv_instructions_title);
+			timerOnFinish.setText(messageFromQuestionActivity);
+		}
+			
+
+			finish=(Button) findViewById(R.id.btn_finish_test);
+			
+			
+			finish.setOnClickListener(new View.OnClickListener() {
+				
+				@Override
+				public void onClick(View arg0) {
+				
+					// omer do your work here :P
+					//omer work is done
+					
+					questionsIDs=Arrays.toString(constants.question_attempted_id);
+					answeredIds=Arrays.toString(constants.answer_attempted_id);
+					isCorrectIds= Arrays.toString(constants.answer_attempted_id);
+							
+					Log.e("getQuestion", Arrays.toString(constants.question_attempted_id));
+					Log.e("getAnswer", Arrays.toString(constants.answer_attempted_id));
+					Log.e("getIsCorrecrt", Arrays.toString(constants.answer_attempted_id));
+					
+					
+					
+					
+					//Intent ourIntent = new Intent(finishScreen.this,MainActivityResult.class);
+					//startActivity(ourIntent);
+					
+					
+					
+					
+					
+				}
+			}); //onclick listener ends 
+
+			
+			
+			
+
+		
+	} //oncreate ends 
+	
+	
+	
+	
+
+}

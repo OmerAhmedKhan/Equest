@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    
+    
+     >
+   <LinearLayout
+                android:id="@+id/scroll_relative_linear_title_question_text"
+                android:layout_width="match_parent"
+                android:layout_height="40dip" 
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@android:color/holo_orange_dark"
+               >
+
+                <TextView
+                    android:id="@+id/imgview_question_text_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="TEST REVIEW"
+                    style="@style/HeadingTestReview"
+                    android:visibility="visible" >
+                </TextView>
+                
+                
+                   
+                
+            </LinearLayout>
+    
+     <ListView
+      android:paddingTop="10dp"
+      
+         android:paddingLeft="10dp"
+        android:id="@+id/list"
+        android:layout_below="@id/scroll_relative_linear_title_question_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/getdata" />
+     
+     
+      <Button
+        android:id="@+id/getdata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp"
+
+        android:visibility="gone"
+        android:text="Get Data" />
+
+       
+      	
+       
+    
+    
+
+</RelativeLayout>

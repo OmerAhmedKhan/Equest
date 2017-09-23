@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Equest</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="instructions">instructions go here   </string>   <!-- <string name="ques">&lt;font color=\&apos;#145A14\&apos;&gt;Q:&lt;/font&gt; %1s</string> -->
+<string name="ques">&lt;font color=\&apos;#f46837\&apos;&gt;Q:&lt;/font&gt; %1s</string>
+<string name="qQuestion">&lt;font color=\&apos;#f46837\&apos;&gt;Q:&lt;/font&gt; %1s</string>
+
+</resources>

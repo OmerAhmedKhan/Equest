@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:dah="http://schemas.android.com/apk/res/com.equest"
+    android:layout_width="match_parent"
+   android:clickable="false"
+    android:layout_height="wrap_content" >
+    
+    
+   <LinearLayout 
+       android:id="@+id/linear"
+        android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                   
+                    android:weightSum="2"
+       
+       
+       >
+    
+ <com.equest.CustTextView
+        android:paddingTop="10dp"
+        android:id="@+id/txtview_question"
+        style="@style/TestReviewPageFont"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+       
+        android:layout_weight="1"
+        dah:cust_font="Oxygen_Regular"
+        android:text="Q:  this is the question. it is dynamic " />
+ 
+ 
+  <ImageView
+        android:id="@+id/imageView_questionimage"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        
+        android:layout_weight="1"
+        android:layout_alignRight="@id/txtview_question"
+        android:layout_alignTop="@id/linear"
+        android:src="@drawable/appicon" />
+ 
+ 
+ 
+ 
+ </LinearLayout>
+ 
+ <com.equest.CustTextView
+        android:id="@+id/txtview_AttemptedAnswer"
+        style="@style/TestReviewFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/linear"
+        android:paddingTop="@dimen/review_row_padding"
+           dah:cust_font="Oxygen_Bold"
+        android:layout_marginBottom="2dp"
+        android:text="ATTEMPTED ANSWER" />
+
+ <com.equest.CustTextView
+        android:id="@+id/txtview_Answer"
+        style="@style/AttemptedAnswerTestReview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtview_AttemptedAnswer"
+        android:maxWidth="@dimen/review_row_maxWidth"
+          dah:cust_font="Oxygen_Regular"
+          
+      
+        android:text="This is the dynamic answer" />
+
+    <ImageView
+        android:id="@+id/imageView_answerimg_present"
+        android:scaleType="centerInside"
+        android:layout_width="100dip"
+        android:layout_height="100dip"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/txtview_Answer"
+        android:layout_marginLeft="47dp"
+        android:paddingBottom="30dp"
+        android:src="@drawable/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/imageView_iscorrect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txtview_Answer"
+        android:layout_marginLeft="24dp"
+        android:layout_marginTop="14dp"
+        android:layout_toRightOf="@+id/txtview_AttemptedAnswer"
+        android:paddingBottom="15dp"
+        android:src="@drawable/ic_launcher" />
+    
+    
+
+   
+
+</RelativeLayout>

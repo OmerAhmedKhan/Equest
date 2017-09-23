@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dah="http://schemas.android.com/apk/res/com.equest"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <com.equest.CustTextView
+        android:id="@+id/test_review_sections_detail_sectiontxtview"
+        style="@style/SectionsSectionWiseResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+       android:layout_marginTop="20dp"
+        android:text=""
+        dah:cust_font="Oxygen_Regular" />
+
+    <com.equest.CustTextView
+        android:id="@+id/test_review_sections_detail_numberofquestxtview"
+        style="@style/NoOfQuestionsSectionWiseResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/test_review_sections_detail_sectiontxtview"
+        android:layout_centerHorizontal="true"
+        dah:cust_font="HELVETICANEUELTPRO_TH"
+        android:text="" />
+
+    <com.equest.CustTextView
+         android:id="@+id/test_review_sections_detail_mediumqueslabel"
+        style="@style/SeverityEMDSectionWiseResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/test_review_sections_detail_numberofquestxtview"
+        android:layout_marginTop="46dp"
+        android:text="MEDIUM"
+        dah:cust_font="Oxygen_Bold" />
+
+    <com.equest.CustTextView
+        android:id="@+id/test_review_sections_detail_hardqueslabel"
+        style="@style/SeverityEMDSectionWiseResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/test_review_sections_detail_mediumqueslabel"
+        android:layout_alignBottom="@+id/test_review_sections_detail_mediumqueslabel"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:text="HARD"
+        dah:cust_font="Oxygen_Bold" />
+
+    <com.equest.CustTextView
+        android:id="@+id/test_review_sections_detail_easydynamictxtview"
+        style="@style/SeverityAttemptedSectionWiseResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/test_review_sections_detail_easyqueslabel"
+        android:layout_below="@+id/test_review_sections_detail_easyqueslabel"
+        android:paddingTop="10dp"
+          android:paddingBottom="25dp"
+        dah:cust_font="HELVETICANEUELTPRO_TH"
+        android:text="" />
+
+    <com.equest.CustTextView
+        android:id="@+id/test_review_sections_detail_harddynamictxtview"
+        style="@style/SeverityAttemptedSectionWiseResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/test_review_sections_detail_easydynamictxtview"
+        android:layout_alignBottom="@+id/test_review_sections_detail_easydynamictxtview"
+        android:layout_alignRight="@+id/test_review_sections_detail_hardqueslabel"
+        dah:cust_font="HELVETICANEUELTPRO_TH"
+         android:paddingTop="10dp"
+     android:paddingBottom="25dp"
+        android:text="" />
+
+    <com.equest.CustTextView
+        android:id="@+id/test_review_sections_detail_easyqueslabel"
+        style="@style/SeverityEMDSectionWiseResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/test_review_sections_detail_mediumqueslabel"
+        android:layout_alignBottom="@+id/test_review_sections_detail_mediumqueslabel"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:text="EASY"
+        dah:cust_font="Oxygen_Bold" />
+
+    <com.equest.CustTextView
+        android:id="@+id/test_review_sections_detail_meduimdynamictxtview"
+        style="@style/SeverityAttemptedSectionWiseResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+         android:paddingBottom="25dp"
+          android:paddingTop="10dp"
+        android:layout_alignBaseline="@+id/test_review_sections_detail_easydynamictxtview"
+        android:layout_alignBottom="@+id/test_review_sections_detail_easydynamictxtview"
+        android:layout_centerHorizontal="true"
+        dah:cust_font="HELVETICANEUELTPRO_TH"
+        android:text="" />
+
+</RelativeLayout>

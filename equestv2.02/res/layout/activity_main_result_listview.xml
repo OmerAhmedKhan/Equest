@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dah="http://schemas.android.com/apk/res/com.equest"
+    android:layout_width="match_parent"
+   android:clickable="false"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg" >
+
+  	  <LinearLayout
+	        android:id="@+id/scroll_relative_linear_title_question_text"
+	        android:layout_width="match_parent"
+	        android:layout_height="40dip"
+	        android:background="@android:color/holo_orange_dark"
+	        android:gravity="center"
+	        android:orientation="vertical" >
+
+	       <com.equest.CustTextView
+	            android:id="@+id/imgview_question_text_title"
+	            style="@style/HeadingTestReview"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_gravity="center"
+	            android:text="TEST REVIEW"
+	            dah:cust_font="Oxygen_Bold"
+	            android:visibility="visible" />
+	     
+	        
+        
+    	</LinearLayout>
+
+ <ListView
+ android:id="@+id/list"
+ android:layout_width="fill_parent"
+ android:divider="@drawable/separator"
+ android:listSelector="@android:color/transparent"
+ android:layout_height="wrap_content"
+ android:layout_above="@+id/getdata"
+ android:layout_below="@id/scroll_relative_linear_title_question_text"
+ android:clickable="false"
+ android:paddingLeft="10dp"
+ android:paddingTop="10dp" />
+
+    <Button
+        android:id="@+id/getdata"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp"
+        android:text="Get Data"
+        android:visibility="gone" />
+
+</RelativeLayout>

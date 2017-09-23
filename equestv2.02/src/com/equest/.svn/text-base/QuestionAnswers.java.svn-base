@@ -1,0 +1,135 @@
+package com.equest;
+
+import java.util.ArrayList;
+
+public class QuestionAnswers {
+	String questions;
+    String questionId;
+    static String timeOfTest;
+    ArrayList<String>  answerId;
+    static int countAnswerOptions;
+    ArrayList<String> isCorrect;
+	ArrayList<String> answer;
+	String isImageQuestion;
+	ArrayList<String> isImageAnswer;
+
+	ArrayList<String> ImageAnswer;
+	ArrayList<String> ImageQuestion;
+
+	String imageQuestion;
+
+	static int countQuestions;
+	public QuestionAnswers()
+	{
+		answer = new ArrayList<String>();
+		isCorrect = new ArrayList<String>();
+		isImageAnswer=new ArrayList<String>();
+		answerId=new ArrayList<String>();
+		countQuestions=0;
+	}
+	public static void setTimeOfTest(String time)
+	{
+		timeOfTest=time;
+	}
+	public static int retTimeOfTest()
+	{
+		int time;
+		time=Integer.parseInt(timeOfTest);
+		time=time*60*1000;
+		return time;
+		//timeOfTest=timeOfTest*60*1000;
+		//return timeOfTest;
+	}
+	public static void setTotalQuestions(int count)
+	{
+		countQuestions=count;
+	}
+	public static void setCountAnswerOptions(int count)
+	{
+		countAnswerOptions=count;
+	}
+	public void setImageQuestion(String image)
+	{
+		imageQuestion=image;
+	}
+	public String retQuestionImage()
+	{
+		return imageQuestion;
+	}
+	public String retAnswerImage(int index)
+	{
+		return  isImageAnswer.get(index);
+	}
+	
+	public static int retCountAnswerOption()
+	{
+		return countAnswerOptions;
+	}
+	public void setQuestionId(String id)
+	{
+		questionId=id;
+	}
+	public void setAnswerId(String id)
+	{
+		answerId.add(id);
+	}
+	public static int retCountQuestions()
+	{
+		return countQuestions;
+	}
+	public void setQuestions(String Quest,String isImage)
+	{
+		questions=Quest;
+		isImageQuestion=isImage;
+	}
+	public void setAnswers(String Ans,String correct,String isImage)
+	{
+		answer.add(Ans);
+		isCorrect.add(correct);
+		isImageAnswer.add(isImage);
+	}
+	public String retIsImageQuestion()
+	{
+		return isImageQuestion;
+	}
+	public String retIsImageAnswer(int index)
+	{
+		return isImageAnswer.get(index);
+	}
+	/*public ArrayList<String> retIsImageQuestion()
+	{
+		return isImageQuestion;//.get(index);
+	}*/
+	public String retQuestion()
+	{
+		return questions;
+	}
+	public String retAnswerId(int index)
+	{
+		return answerId.get(index);
+	}
+	public String retAnswer(int index)
+	{
+		return answer.get(index);
+	}
+	public String retIsCorrect(int index)
+	{
+		return isCorrect.get(index);
+	}
+	public String retQuestionId()
+	{
+		return questionId;
+	}
+	
+	@Override
+	public String toString() {
+		return "QuestionAnswers [questions=" + questions + ", questionId="
+				+ questionId + ", answerId=" + answerId + ", isCorrect="
+				+ isCorrect + ", answer=" + answer + ", isImageQuestion="
+				+ isImageQuestion + ", isImageAnswer=" + isImageAnswer
+				+ ", imageQuestion=" + imageQuestion + "]";
+	}
+	
+
+	
+}

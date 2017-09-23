@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/test_review_sections_detail_sectiontxtview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="57dp"
+        android:text="This is dynamic section textview" />
+
+    <TextView
+        android:id="@+id/test_review_sections_detail_numberofquestxtview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/test_review_sections_detail_sectiontxtview"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="26dp"
+        android:text="This is 15/20 textview" />
+
+              <TextView
+                  android:id="@+id/test_review_sections_detail_easydynamictxtview"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignBaseline="@+id/test_review_sections_detail_meduimdynamictxtview"
+                  android:layout_alignBottom="@+id/test_review_sections_detail_meduimdynamictxtview"
+                  android:layout_toLeftOf="@+id/test_review_sections_detail_numberofquestxtview"
+                  android:text="Dy Easy" />
+
+              <TextView
+                  android:id="@+id/test_review_sections_detail_meduimdynamictxtview"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_below="@+id/test_review_sections_detail_mediumqueslabel"
+                  android:layout_centerHorizontal="true"
+                  android:layout_marginTop="30dp"
+                  android:text="Dy Medium" />
+
+              <TextView
+                  android:id="@+id/test_review_sections_detail_easyqueslabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignLeft="@+id/test_review_sections_detail_easydynamictxtview"
+                  android:layout_below="@+id/test_review_sections_detail_numberofquestxtview"
+                  android:layout_marginTop="66dp"
+                  android:text="Easy" />
+
+              <TextView
+                  android:id="@+id/test_review_sections_detail_mediumqueslabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_alignBaseline="@+id/test_review_sections_detail_easyqueslabel"
+                  android:layout_alignBottom="@+id/test_review_sections_detail_easyqueslabel"
+                  android:layout_centerHorizontal="true"
+                  android:text="Medium" />
+
+              <TextView
+                  android:id="@+id/test_review_sections_detail_hardqueslabel"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:layout_above="@+id/test_review_sections_detail_meduimdynamictxtview"
+                  android:layout_alignRight="@+id/test_review_sections_detail_sectiontxtview"
+                  android:text="Hard" />
+
+               <TextView
+                   android:id="@+id/test_review_sections_detail_harddynamictxtview"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:layout_alignBaseline="@+id/test_review_sections_detail_meduimdynamictxtview"
+                   android:layout_alignBottom="@+id/test_review_sections_detail_meduimdynamictxtview"
+                   android:layout_toRightOf="@+id/test_review_sections_detail_numberofquestxtview"
+                   android:text="Dy Hard" />
+      
+</RelativeLayout>

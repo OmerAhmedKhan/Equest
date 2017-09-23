@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dah="http://schemas.android.com/apk/res/com.equest"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical"
+    android:background="@drawable/bg">
+
+    <LinearLayout
+        android:id="@+id/linear_linear_title_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+           <com.equest.CustTextView
+            android:id="@+id/qinstruction_text_title"
+            style="@style/HeadingQuestionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="INSTRUCTIONS"
+             dah:cust_font="Oxygen_Bold"
+            android:visibility="visible" >
+        </com.equest.CustTextView>
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scroll_instructions"
+        android:layout_width="match_parent"
+        android:layout_height="300dip" >
+
+        <LinearLayout
+            android:id="@+id/scroll_linear_instruction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            
+            
+            <TextView
+                android:id="@+id/tv_instructions_welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="WELCOME"
+                android:textSize="25sp"
+                android:layout_margin="10dip" />
+            
+            <TextView
+                android:id="@+id/tv_instructions_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Please read the instructions carefully."
+                android:textSize="20sp"
+                android:textColor="@color/red"
+                android:layout_margin="10dip" />
+
+              <com.equest.CustTextView        
+                android:id="@+id/tv_instructions_firstpoint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="1. There is no negative marking."
+                dah:cust_font="Oxygen_Light"
+                android:layout_marginLeft="20dip"
+                 android:layout_marginRight="20dip"
+                      android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"  />
+              
+   <com.equest.CustTextView        
+                android:id="@+id/tv_instructions_secondpoint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="2. Given Answers can be changed by pressing the Prev button."
+                dah:cust_font="Oxygen_Light"
+                 android:layout_marginLeft="20dip"
+                 android:layout_marginRight="20dip"
+                      android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"  />
+   
+     <com.equest.CustTextView        
+                android:id="@+id/tv_instructions_thirdpoint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="3. DO NOT forget to press the Finish button once the test is over."
+                dah:cust_font="Oxygen_Light"
+                 android:layout_marginLeft="20dip"
+                 android:layout_marginRight="20dip"
+                      android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"  />
+                
+                
+                
+                   <com.equest.CustTextView        
+                android:id="@+id/tv_instructions_fourthpoint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="4. Even if you run out of time please make sure you press the Finish button ."
+                dah:cust_font="Oxygen_Light"
+                 android:layout_marginLeft="20dip"
+                 android:layout_marginRight="20dip"
+                      android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"  />
+            
+                    <com.equest.CustTextView        
+                android:id="@+id/tv_instructions_fifthpoint"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="5. Every question has FOUR options ."
+                dah:cust_font="Oxygen_Light"
+                 android:layout_marginLeft="20dip"
+                 android:layout_marginRight="20dip"
+                      android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"  />
+            
+        </LinearLayout>
+        
+        
+        
+        
+        
+        
+    </ScrollView>
+    
+    
+    <LinearLayout
+            
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+            
+            <com.equest.CustomButtonView
+                android:id="@+id/btn_start_test"
+                style="@style/OkButtonInstruction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="40dip"
+                 dah:cust_font="Oxygen_Regular"
+                android:background="@drawable/selector_answer_text_buttons"
+                android:text="START" />
+            
+            
+            
+        </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,871 @@
+package com.equest;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.text.Html;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.ScrollView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.androidquery.AQuery;
+import com.constants.constants;
+import com.equest.network.URLs;
+import com.equest.utilities.InternetCheckerMainActivity;
+
+public class Questions_Activity extends Activity implements
+		OnClickListener {
+
+	private Context context;
+	JSONObject JSON;
+	JSONObject Questions, question_no;
+	JSONObject body;
+	JSONObject Answers, answer_no, answer_detail;
+	List<NameValuePair> POST = new ArrayList<NameValuePair>();
+	ArrayList<QuestionAnswers> QuestionAnswersPairs;
+	timer timerOfTest;
+	// ArrayList<QuestionAnswers> returnedQuestionAnswers=new
+	// ArrayList<QuestionAnswers>(); ;
+
+	AQuery aq;
+
+	int questionCount = 0;
+
+	String pairQA;
+
+	String test = "";
+
+	String[] answers_id;
+	String[] question_id;
+	String[] is_corect_wrt_question;
+	boolean is_answer_check = false;
+	boolean is_answer_image_check = false;
+	int[] answered_option_btn_index;
+	boolean[]is_prevoius_answer_image;
+
+	// View previousanswer;
+
+	ScrollView textview;
+	ScrollView imageview;
+
+	QuestionAnswers questionAndAnswer = new QuestionAnswers();
+
+	TextView question, questionNo;
+	TextView testTimer;
+	Button buttons_answer[];
+
+	ImageView questionImage;
+	ImageButton btn_text_next;
+	ImageButton btn_text_prev;
+
+	// ///////////////////////////////////////
+	TextView question_img_description;
+	ImageView question_img_images;
+	ImageButton[] answer_btn_images;
+	ImageButton btn_img_next, btn_img_prev;
+
+	// //////////////////////////////////
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.questions_layout_text);
+		testTimer=(TextView) findViewById(R.id.tv_question_text_timer);
+	
+		textview = (ScrollView) findViewById(R.id.scroll_questions_text);
+		imageview = (ScrollView) findViewById(R.id.scroll_questions_image);
+		textview.setVisibility(View.GONE);
+		imageview.setVisibility(View.GONE);
+
+		aq = new AQuery(this);
+		imageInitializer();
+		question = (TextView) findViewById(R.id.tv_question_text_description);
+		questionNo = (TextView) findViewById(R.id.question_text_title);
+
+		buttons_answer = new Button[4];
+		buttons_answer[0] = (Button) findViewById(R.id.btn_answer_option_1);
+		buttons_answer[1] = (Button) findViewById(R.id.btn_answer_option_2);
+		buttons_answer[2] = (Button) findViewById(R.id.btn_answer_option_3);
+		buttons_answer[3] = (Button) findViewById(R.id.btn_answer_option_4);
+
+		questionImage = (ImageView) findViewById(R.id.img_question_text_description);
+
+		btn_text_next = (ImageButton) findViewById(R.id.btn_next_question_text);
+		btn_text_prev = (ImageButton) findViewById(R.id.btn_previous_question_text);
+		
+		QuestionAnswersPairs = new ArrayList<QuestionAnswers>();
+		context = this;
+		POST.add(new BasicNameValuePair("functionName", "question_pairs"));
+		constants.isFinished=false;
+		try {
+			new displayQuestionAnswers().execute().get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		timerOfTest=new timer(testTimer);
+		timerOfTest.setTimer(QuestionAnswers.retTimeOfTest(), 1000);
+		
+		timerOfTest.startTimer();
+
+		answers_id = new String[questionCount];
+		question_id = new String[questionCount];
+		answered_option_btn_index = new int[questionCount];
+		is_corect_wrt_question = new String[questionCount];
+		is_prevoius_answer_image=new boolean[questionCount];
+		constants.question_attempted_id = new String[questionCount];
+		constants.answer_attempted_id = new String[questionCount];
+		constants.is_correct_wrt_answer_id = new String[questionCount];
+
+		int j = 0;
+		while (j < QuestionAnswersPairs.get(constants.index)
+				.retCountAnswerOption()) {
+			// answers[i]=QuestionAnswersPairs.get(constants.index).retAnswer(i);
+			if (!QuestionAnswersPairs.get(constants.index).retAnswerImage(j)
+					.equals("0")) {
+				is_answer_image_check = true;
+			}
+
+			j++;
+		}
+		
+		is_prevoius_answer_image[constants.index]=is_answer_image_check;
+
+		if (is_answer_image_check) {
+
+			textview.setVisibility(View.GONE);
+			imageview.setVisibility(View.VISIBLE);
+
+			question_img_description.setText((Html.fromHtml(getString(
+					R.string.ques, QuestionAnswersPairs.get(constants.index)
+							.retQuestion()))));
+
+			questionNo.setText("QUESTION " + (constants.index + 1) + "/"
+					+ questionCount);
+			
+			// question_img_images
+			Log.e("image_url", QuestionAnswersPairs.get(constants.index)
+					.retAnswerImage(0));
+			aq.id(R.id.img_answer_1_img_description)
+					.image(QuestionAnswersPairs.get(constants.index)
+							.retAnswerImage(0));
+
+			/*
+			 * AQuery aq = new AQuery(convertView);
+			 * aq.id(viewHolder.answerimg_present).image(arrayList.get(position)
+			 * .getAnswer_image(), true, true, 0, R.drawable.ic_launcher);
+			 */
+
+			/*
+			 * Intent intent = new Intent(Questions_Text_Activity.this,
+			 * Question_Image_Activity.class);
+			 * intent.putExtra("questionDiscription",
+			 * QuestionAnswersPairs.get(constants.index).retQuestion());
+			 * 
+			 * intent.putExtra("answerOption1",QuestionAnswersPairs.get(constants
+			 * .index) .retAnswerImage(0));
+			 * intent.putExtra("answerOption2",QuestionAnswersPairs
+			 * .get(constants.index) .retAnswerImage(1));
+			 * intent.putExtra("answerOption3"
+			 * ,QuestionAnswersPairs.get(constants.index) .retAnswerImage(2));
+			 * intent
+			 * .putExtra("answerOption4",QuestionAnswersPairs.get(constants
+			 * .index) .retAnswerImage(3));
+			 */
+
+			/*
+			 * for (int k = 0; k < QuestionAnswersPairs.get(constants.index)
+			 * .retCountAnswerOption(); k++) {
+			 * 
+			 * intent.putExtra("answerOption"+k,QuestionAnswersPairs.get(constants
+			 * .index) .retAnswerImage(j));
+			 * 
+			 * 
+			 * }
+			 */
+
+		} else {
+
+			textview.setVisibility(View.VISIBLE);
+			imageview.setVisibility(View.GONE);
+
+			Log.e("index", String.valueOf(constants.index));
+
+			// lat.setText((Html.fromHtml(getString(R.string.quiz,coord.getString("lat")))));
+
+			question.setText((Html.fromHtml(getString(R.string.ques,
+					QuestionAnswersPairs.get(constants.index).retQuestion()))));
+
+			questionNo.setText("QUESTION " + (constants.index + 1) + "/"
+					+ questionCount);
+
+			Log.e("is_image", QuestionAnswersPairs.get(constants.index)
+					.retIsImageQuestion());
+
+			if (QuestionAnswersPairs.get(constants.index).retIsImageQuestion()
+					.equals("1")) {
+				questionImage.setVisibility(View.VISIBLE);
+			} else {
+				questionImage.setVisibility(View.GONE);
+			}
+
+			int i = 0;
+			while (i < QuestionAnswersPairs.get(constants.index)
+					.retCountAnswerOption()) {
+				// answers[i]=QuestionAnswersPairs.get(constants.index).retAnswer(i);
+				buttons_answer[i].setText(QuestionAnswersPairs.get(
+						constants.index).retAnswer(i));
+
+				i++;
+			}
+			// question.setText(test);
+			// Log.e("test", test);
+		}
+
+		btn_text_next.setOnClickListener(this);
+		btn_text_prev.setOnClickListener(this);
+		buttons_answer[0].setOnClickListener(this);
+		buttons_answer[1].setOnClickListener(this);
+		// buttons_answer[2].setOnClickListener(this);
+		// buttons_answer[3].setOnClickListener(this);
+		
+		btn_img_prev.setVisibility(View.GONE);
+		btn_text_prev.setVisibility(View.GONE);
+		
+
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		Log.e("button_id", String.valueOf(v.getId()));
+		switch (v.getId()) {
+		case R.id.img_answer_1_img_description :
+		case R.id.btn_answer_option_1: {
+			is_answer_check = true;
+			// Log.e("index_id", String.valueOf(constants.index));
+			/*
+			 * answers_id[constants.index] = QuestionAnswersPairs.get(
+			 * constants.index).retAnswerId(0); // Log.e("answer",
+			 * answers_id[constants.index]); question_id[constants.index] =
+			 * QuestionAnswersPairs.get( constants.index).retQuestionId();
+			 * is_corect_wrt_question[constants.index] =
+			 * QuestionAnswersPairs.get( constants.index).retIsCorrect(0);
+			 */
+
+			v.setBackgroundResource(R.drawable.btn_blue_pressed);
+			buttons_answer[1].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[2].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[3].setBackgroundResource(R.drawable.btn_blue_normal);
+			
+			if(is_prevoius_answer_image[constants.index])
+			{
+				v.setBackgroundResource(R.drawable.btn_options_placeholder_pressed);
+			answer_btn_images[1].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[2].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[3].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			
+			}
+
+			answered_option_btn_index[constants.index] = 1;
+
+			constants.answer_attempted_id[constants.index] = QuestionAnswersPairs
+					.get(constants.index).retAnswerId(0);
+			// Log.e("answer", answers_id[constants.index]);
+			constants.question_attempted_id[constants.index] = QuestionAnswersPairs
+					.get(constants.index).retQuestionId();
+			constants.is_correct_wrt_answer_id[constants.index] = QuestionAnswersPairs
+					.get(constants.index).retIsCorrect(0);
+
+			break;
+		}
+		case R.id.img_answer_2_img_description :
+		case R.id.btn_answer_option_2: {
+			is_answer_check = true;
+
+			v.setBackgroundResource(R.drawable.btn_blue_pressed);
+			buttons_answer[0].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[2].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[3].setBackgroundResource(R.drawable.btn_blue_normal);
+			
+			if(is_prevoius_answer_image[constants.index])
+			{
+				v.setBackgroundResource(R.drawable.btn_options_placeholder_pressed);
+			answer_btn_images[0].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[2].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[3].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			
+			}
+			
+
+			answered_option_btn_index[constants.index] = 2;
+
+			constants.answer_attempted_id[constants.index] = QuestionAnswersPairs
+					.get(constants.index).retAnswerId(1);
+			// Log.e("answer", answers_id[constants.index]);
+			constants.question_attempted_id[constants.index] = QuestionAnswersPairs
+					.get(constants.index).retQuestionId();
+			constants.is_correct_wrt_answer_id[constants.index] = QuestionAnswersPairs
+					.get(constants.index).retIsCorrect(1);
+
+			break;
+		}
+		case R.id.img_answer_3_img_description :
+		case R.id.btn_answer_option_3: {
+			is_answer_check = true;
+
+			v.setBackgroundResource(R.drawable.btn_blue_pressed);
+			buttons_answer[0].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[1].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[3].setBackgroundResource(R.drawable.btn_blue_normal);
+			
+		
+			
+			if(is_prevoius_answer_image[constants.index])
+			{
+				v.setBackgroundResource(R.drawable.btn_options_placeholder_pressed);
+			answer_btn_images[0].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[2].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[3].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			
+			}
+			
+
+			answered_option_btn_index[constants.index] = 3;
+			// answers_id[constants.index] =
+			// QuestionAnswersPairs.get(constants.index).retAnswerId(2);
+			// question_id[constants.index]=QuestionAnswersPairs.get(constants.index).retQuestionId();
+			// is_corect_wrt_question[constants.index]=QuestionAnswersPairs.get(constants.index).retIsCorrect(2);
+
+			break;
+		}
+		case R.id.img_answer_4_img_description :
+		case R.id.btn_answer_option_4: {
+			is_answer_check = true;
+
+			v.setBackgroundResource(R.drawable.btn_blue_pressed);
+			buttons_answer[0].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[1].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[2].setBackgroundResource(R.drawable.btn_blue_normal);
+			
+			
+			if(is_prevoius_answer_image[constants.index])
+			{
+				v.setBackgroundResource(R.drawable.btn_options_placeholder_pressed);
+			answer_btn_images[1].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[2].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[0].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			
+			}
+			
+			
+
+			answered_option_btn_index[constants.index] = 4;
+			// answers_id[constants.index] =
+			// QuestionAnswersPairs.get(constants.index).retAnswerId(3);
+			// question_id[constants.index]=QuestionAnswersPairs.get(constants.index).retQuestionId();
+			// is_corect_wrt_question[constants.index]=QuestionAnswersPairs.get(constants.index).retIsCorrect(3);
+
+			break;
+		}
+		case R.id.btn_next_question_text:
+		case R.id.btn_next_question_img: {
+			
+			
+//TODO
+			
+			btn_img_prev.setVisibility(View.VISIBLE);
+			btn_text_prev.setVisibility(View.VISIBLE);
+			
+			//Log.e("next_btn_id", String.valueOf(value));
+			buttons_answer[0].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[1].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[2].setBackgroundResource(R.drawable.btn_blue_normal);
+			buttons_answer[3].setBackgroundResource(R.drawable.btn_blue_normal);
+			
+			if(is_prevoius_answer_image[constants.index])
+			{
+				
+			answer_btn_images[1].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[2].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[3].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			answer_btn_images[3].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+			
+			}
+
+			if (constants.index == questionCount - 1) {
+				// TODO end activity here and save all the question,answersa dn
+
+				Intent intent = new Intent(this, finishScreen.class);
+				constants.isFinished=true;
+				startActivity(intent);
+				finish();
+			} else if (is_answer_check ) {
+
+				Log.e("question",
+						constants.question_attempted_id[constants.index]);
+				Log.e("answer", constants.answer_attempted_id[constants.index]);
+				Log.e("is_correct",
+						constants.is_correct_wrt_answer_id[constants.index]);
+
+				is_answer_check = false;
+				is_answer_image_check = false;
+
+				constants.index++;
+
+				Log.e("is_image", QuestionAnswersPairs.get(constants.index)
+						.retIsImageQuestion());
+
+				int j = 0;
+				while (j < QuestionAnswersPairs.get(constants.index)
+						.retCountAnswerOption()) {
+					// answers[i]=QuestionAnswersPairs.get(constants.index).retAnswer(i);
+					if (!QuestionAnswersPairs.get(constants.index)
+							.retAnswerImage(j).equals("0")) {
+						is_answer_image_check = true;
+					}
+
+					j++;
+				}
+				
+				is_prevoius_answer_image[constants.index]=is_answer_image_check;
+
+				if (is_answer_image_check) {
+
+					textview.setVisibility(View.GONE);
+					imageview.setVisibility(View.VISIBLE);
+
+					questionNo.setText("QUESTION " + (constants.index + 1)
+							+ "/" + questionCount);
+
+					question_img_description.setText((Html.fromHtml(getString(
+							R.string.ques,
+							QuestionAnswersPairs.get(constants.index)
+									.retQuestion()))));
+					// question_img_images
+					Log.e("image_url", QuestionAnswersPairs
+							.get(constants.index).retAnswerImage(0));
+					aq.id(R.id.img_answer_1_img_description).image(
+							QuestionAnswersPairs.get(constants.index)
+									.retAnswerImage(0));
+
+					//is_answer_check = false;
+					//is_answer_image_check = false;
+
+					//constants.index++;
+
+					/*
+					 * Intent intent = new Intent(Questions_Text_Activity.this,
+					 * Question_Image_Activity.class); startActivity(intent);
+					 */
+				}
+
+				else {
+
+					textview.setVisibility(View.VISIBLE);
+					imageview.setVisibility(View.GONE);
+
+					if (QuestionAnswersPairs.get(constants.index)
+							.retIsImageQuestion().equals("1")) {
+						questionImage.setVisibility(View.VISIBLE);
+					} else {
+						questionImage.setVisibility(View.GONE);
+					}
+
+					question.setText((Html.fromHtml(getString(R.string.ques,
+							QuestionAnswersPairs.get(constants.index)
+									.retQuestion()))));
+
+					questionNo.setText("QUESTION " + (constants.index + 1)
+							+ "/" + questionCount);
+
+					int i = 0;
+					while (i < QuestionAnswersPairs.get(constants.index)
+							.retCountAnswerOption()) {
+						// answers[i]=QuestionAnswersPairs.get(constants.index).retAnswer(i);
+						buttons_answer[i].setText(QuestionAnswersPairs.get(
+								constants.index).retAnswer(i));
+
+						i++;
+					}
+
+				}
+			} else {
+				
+
+				if((constants.index)==0)
+						{
+					btn_img_prev.setVisibility(View.GONE);
+					btn_text_prev.setVisibility(View.GONE);
+						}
+				
+				Toast.makeText(
+						getApplicationContext(),
+						"it is a non-negative marking test please give some answer",
+						Toast.LENGTH_SHORT).show();
+			}
+			
+			
+		/*	if((constants.index-1)==0)
+					{
+				btn_img_prev.setVisibility(View.GONE);
+				btn_text_prev.setVisibility(View.GONE);
+					}*/
+
+			break;
+
+		}
+
+		case R.id.btn_previous_question_text:
+		case R.id.btn_previous_question_img: {
+
+			Log.e("questionCount", String.valueOf(questionCount));
+			
+			if((constants.index)==1)
+			{
+		btn_img_prev.setVisibility(View.GONE);
+		btn_text_prev.setVisibility(View.GONE);
+			}
+			
+
+			if (constants.index == 0) {
+				// TODO end activity here and save all the question,answersa dn
+				// iscorrect in a string
+				// Intent intent = new Intent(this, Splash.class);
+				// startActivity(intent);
+				btn_img_prev.setVisibility(View.GONE);
+				btn_text_prev.setVisibility(View.GONE);
+				
+			} else {
+
+				constants.index--;
+				
+				
+				
+				/*int j = 0;
+				while (j < QuestionAnswersPairs.get(constants.index)
+						.retCountAnswerOption()) {
+					// answers[i]=QuestionAnswersPairs.get(constants.index).retAnswer(i);
+					if (!QuestionAnswersPairs.get(constants.index)
+							.retAnswerImage(j).equals("0")) {
+						is_answer_image_check = true;
+					}
+
+					j++;
+				}*/
+				
+				Log.e("Image_check_at_previous", String.valueOf(is_prevoius_answer_image[constants.index]));
+				
+				if(is_prevoius_answer_image[constants.index])
+				{
+					textview.setVisibility(View.GONE);
+					imageview.setVisibility(View.VISIBLE);
+
+					questionNo.setText("QUESTION " + (constants.index + 1)
+							+ "/" + questionCount);
+
+					question_img_description.setText((Html.fromHtml(getString(
+							R.string.ques,
+							QuestionAnswersPairs.get(constants.index)
+									.retQuestion()))));
+					// question_img_images
+					Log.e("image_url", QuestionAnswersPairs
+							.get(constants.index).retAnswerImage(0));
+					aq.id(R.id.img_answer_1_img_description).image(
+							QuestionAnswersPairs.get(constants.index)
+									.retAnswerImage(0));
+
+					answer_btn_images[0].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+					answer_btn_images[1].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+					answer_btn_images[2].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+					answer_btn_images[3].setBackgroundResource(R.drawable.btn_options_placeholder_normal);
+					answer_btn_images[answered_option_btn_index[constants.index] - 1]
+							.setBackgroundResource(R.drawable.btn_options_placeholder_pressed);
+					
+					aq.id(R.id.img_answer_1_img_description).image(
+							QuestionAnswersPairs.get(constants.index)
+									.retAnswerImage(0));
+					
+				}
+				else
+				{
+				
+				
+					textview.setVisibility(View.VISIBLE);
+					imageview.setVisibility(View.GONE);
+				
+				
+				
+				
+				
+				question.setText((Html
+						.fromHtml(getString(R.string.ques, QuestionAnswersPairs
+								.get(constants.index).retQuestion()))));
+				
+				if (QuestionAnswersPairs.get(constants.index)
+						.retIsImageQuestion().equals("1")) {
+					questionImage.setVisibility(View.VISIBLE);
+				} else {
+					questionImage.setVisibility(View.GONE);
+				}
+
+				questionNo.setText("QUESTION " + (constants.index + 1) + "/"
+						+ questionCount);
+
+				/*
+				 * previousanswer=new View(this); previousanswer.setId(
+				 * answer_btn_ids[constants.index]);
+				 * previousanswer.setBackgroundResource
+				 * (R.drawable.btn_blue_pressed);
+				 */
+
+				buttons_answer[0]
+						.setBackgroundResource(R.drawable.btn_blue_normal);
+				buttons_answer[1]
+						.setBackgroundResource(R.drawable.btn_blue_normal);
+				buttons_answer[2]
+						.setBackgroundResource(R.drawable.btn_blue_normal);
+				buttons_answer[3]
+						.setBackgroundResource(R.drawable.btn_blue_normal);
+
+				Log.e("answered_option_btn_index_phlye",
+						String.valueOf(answered_option_btn_index[constants.index] - 1));
+				buttons_answer[answered_option_btn_index[constants.index] - 1]
+						.setBackgroundResource(R.drawable.btn_blue_pressed);
+				Log.e("answered_option_btn_index bad m",
+						String.valueOf(answered_option_btn_index[constants.index] - 1));
+
+				int i = 0;
+				while (i < QuestionAnswersPairs.get(constants.index)
+						.retCountAnswerOption()) {
+					// answers[i]=QuestionAnswersPairs.get(constants.index).retAnswer(i);
+					buttons_answer[i].setText(QuestionAnswersPairs.get(
+							constants.index).retAnswer(i));
+
+					i++;
+				}
+				}
+			}
+
+			break;
+
+		}
+
+		default:
+			break;
+		}
+
+	}
+
+	// /////////////////////////////
+
+	public void imageInitializer() {
+		question_img_description = (TextView) findViewById(R.id.tv_question_img_description);
+		question_img_images = (ImageView) findViewById(R.id.img_question_img_description);
+		answer_btn_images = new ImageButton[4];
+		answer_btn_images[0] = (ImageButton) findViewById(R.id.img_answer_1_img_description);
+		answer_btn_images[1] = (ImageButton) findViewById(R.id.img_answer_2_img_description);
+		answer_btn_images[2] = (ImageButton) findViewById(R.id.img_answer_3_img_description);
+		answer_btn_images[3] = (ImageButton) findViewById(R.id.img_answer_4_img_description);
+		btn_img_next = (ImageButton) findViewById(R.id.btn_next_question_img);
+		btn_img_prev = (ImageButton) findViewById(R.id.btn_previous_question_img);
+		
+		btn_img_next.setOnClickListener(this);
+		btn_img_prev.setOnClickListener(this);
+		answer_btn_images[0].setOnClickListener(this);
+		answer_btn_images[1].setOnClickListener(this);
+		//answer_btn_images[2].setOnClickListener(this);
+		//answer_btn_images[3].setOnClickListener(this);
+	}
+
+	// public Questions_Activity()
+	// {
+	// context=this;
+	// POST.add(new BasicNameValuePair("functionName", "question_pairs"));
+	//
+	// }
+	private class displayQuestionAnswers extends
+			AsyncTask<Void, Void, JSONObject> {
+		private ProgressDialog progressDialog;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progressDialog = new ProgressDialog(context);
+			progressDialog.setCancelable(false);
+			progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog.setMessage("Loading...");
+			progressDialog.show();
+		}
+
+		@Override
+		protected JSONObject doInBackground(Void... params) {
+
+			try {
+				pairQA = Network.makeHttpRequest(context, URLs.Base_URL,
+						"POST", POST).toString();
+				JSON = new JSONObject(pairQA);
+				Log.e("json", pairQA);
+				body = JSON.getJSONObject("body");
+				int count = Integer.parseInt(body.getString("total_question"));
+				questionCount = count;
+				Log.e("count", String.valueOf(count));
+				String isImageAnswer;
+				Questions = body.getJSONObject("questions");
+				QuestionAnswers.setTimeOfTest(body.getString(("time")));
+
+				for (int i = 0; i <= count; i++) {
+
+					question_no = Questions
+							.getJSONObject(String.valueOf(i + 1));
+					QuestionAnswers QA = new QuestionAnswers();
+					QuestionAnswers.setTotalQuestions(count);
+					QA.setQuestionId(question_no.getString("id"));
+					QA.setQuestions(question_no.getString("question"),
+							question_no.getString("is_image"));
+					QA.setImageQuestion(question_no.getString("image"));
+					Answers = question_no.getJSONObject("answers");
+					answer_no = Answers.getJSONObject("answers");
+					QuestionAnswers.setCountAnswerOptions(answer_no.length());
+					for (int j = 0; j < answer_no.length(); j++) {
+						answer_detail = answer_no.getJSONObject(String
+								.valueOf(j + 1));
+						Log.e("image answer",
+								"" + answer_detail.getString("image") + "\n");
+						/*
+						 * if(answer_detail.getString("image").equals("null")) {
+						 * isImageAnswer="0"; } else { isImageAnswer="1"; }
+						 * Log.e("isImageAnswer",""+isImageAnswer+"\n");
+						 */
+						QA.setAnswerId(answer_detail.getString("id"));
+						QA.setAnswers(
+								answer_detail.getString("option"),
+								answer_detail.getString("is_correct"),
+								answer_detail.getString("image").equals("null") ? "0"
+										: answer_detail.getString("image"));
+					}
+					// answer_detail=answer_no.
+					QuestionAnswersPairs.add(QA);
+
+				}
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return Questions;
+
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject Questions) {
+
+			if (progressDialog != null && progressDialog.isShowing())
+				progressDialog.dismiss();
+			Log.e("QuestionAnswersPairs", "" + QuestionAnswersPairs.toString());
+			// returnedQuestionAnswers=QuestionAnswersPairs;
+			// question.setText(QuestionAnswersPairs.get(0).retQuestion());
+			// test=QuestionAnswersPairs.get(0).retQuestion();
+			// Log.e("test", test);
+			super.onPostExecute(Questions);
+
+		}
+
+	}
+	public class timer {
+
+		long  timeInSeconds;
+		long  timeInterval;
+		int seconds;
+		int hours;
+		int minutes;
+		boolean isFinished;
+		CountDownTimer timer;
+		TextView txtView;
+		
+		public timer(TextView txtView){
+			isFinished = true;
+			this.txtView = txtView;
+		}
+		public void setTimer(long milliSeconds,long interval)
+		{
+			isFinished=true;
+			timer=new CountDownTimer(milliSeconds,interval) {
+				
+				@Override
+				public void onTick(long milliSeconds) {
+					//Log.i("Salik", "" + milliSeconds);
+					 seconds = (int) (milliSeconds / 1000) % 60 ;
+					 minutes = (int) ((milliSeconds / (1000*60)) % 60);
+					 hours   = (int) ((milliSeconds / (1000*60*60)) % 24);
+					 if(hours==0)
+					 {
+						 txtView.setText(minutes+":"+seconds);
+					 }else 
+					 {txtView.setText(hours+":"+minutes+":"+seconds);}
+				}
+				
+				@Override
+				public void onFinish() {
+					//Log.i("Salik", "Finished" );
+					isFinished=false;
+					Intent goToFinishScreen=new Intent(context,finishScreen.class);
+					goToFinishScreen.putExtra("timer_finished", "Time's Up!");
+					startActivity(goToFinishScreen);
+					finish();
+					
+				}
+			};
+		}
+		public void startTimer()
+		{
+			timer.start();
+		}
+		public CountDownTimer getTimer()
+		{
+			return timer;
+		}
+		public boolean retIsFinished()
+		{
+			return isFinished;
+		}
+		public int retHours()
+		{
+			return hours;
+		}
+		public int retMinutes()
+		{
+			return minutes;
+		}
+		public int retSeconds()
+		{
+			return seconds;
+		}
+
+
+	}
+
+}//

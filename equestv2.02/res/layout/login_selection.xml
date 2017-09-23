@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dah="http://schemas.android.com/apk/res/com.equest"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:orientation="vertical"
+    android:background="@drawable/bg">
+
+    <LinearLayout
+        android:id="@+id/linear_linear_title_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+           <com.equest.CustTextView
+            android:id="@+id/qinstruction_text_title"
+            style="@style/HeadingQuestionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="LOGIN"
+             dah:cust_font="Oxygen_Bold"
+            android:visibility="visible" >
+        </com.equest.CustTextView>
+    </LinearLayout>
+    
+     
+            <TextView
+                android:id="@+id/tv_instructions_welcome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="WELCOME"
+                android:textSize="25sp"
+                android:layout_margin="10dip" />
+            
+             <ImageView 
+      
+       android:id="@+id/imgview_logo_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+      
+      
+      />
+  
+      <com.equest.CustTextView
+            
+            android:id="@+id/tv_please_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+             dah:cust_font="Oxygen_Light"
+            android:text="Please Select Mode Of Login" 
+            android:layout_marginTop="20dip"
+            style="@style/PleaseTextViewLogin"
+            />
+            
+
+    
+    
+    <LinearLayout
+            
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:orientation="vertical">
+            
+            <com.equest.CustomButtonView
+                android:id="@+id/btn_login_online"
+                style="@style/OkButtonInstruction"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dip"
+                 dah:cust_font="Oxygen_Regular"
+                 android:textColor="@android:color/holo_orange_dark"
+                android:background="@drawable/selector_answer_text_buttons"
+                android:text="Login Online"
+                
+                 />
+            
+              <com.equest.CustomButtonView
+                android:id="@+id/btn_login_offline"
+                style="@style/OkButtonInstruction"
+                android:layout_width="200dip"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="20dip"
+                 dah:cust_font="Oxygen_Regular"
+                android:background="@drawable/selector_answer_text_buttons"
+                android:text="Login Offline"
+                
+                 />
+            
+            
+            
+        </LinearLayout>
+
+</LinearLayout>

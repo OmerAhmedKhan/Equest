@@ -1,0 +1,70 @@
+10
+
+dir
+70
+http://192.175.0.7:8081/svn/equest_summer_training_2014/branches/development/code/android/Equest/res
+http://192.175.0.7:8081/svn/equest_summer_training_2014
+
+
+
+2014-06-20T04:41:16.009536Z
+69
+shireen.ferozpurwalla
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+918dd2a0-41b0-284d-93dd-ab7d6949399d
+
+values
+dir
+
+values-sw720dp-land
+dir
+
+values-sw600dp
+dir
+
+drawable
+dir
+
+drawable-hdpi
+dir
+
+drawable-xxhdpi
+dir
+
+menu
+dir
+
+values-v11
+dir
+
+drawable-ldpi
+dir
+
+values-v14
+dir
+
+drawable-mdpi
+dir
+
+raw
+dir
+
+drawable-xhdpi
+dir
+
+layout
+dir
+

@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dah="http://schemas.android.com/apk/res/com.equest"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+    
+    
+     
+    
+     <LinearLayout
+        android:id="@+id/linear_title_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        
+        android:orientation="vertical" >
+
+        <com.equest.CustTextView
+            android:id="@+id/login_title"
+            style="@style/HeadingQuestionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+             dah:cust_font="Oxygen_Bold"
+            android:text="LOGIN"
+            android:visibility="visible" >
+        </com.equest.CustTextView>
+    
+    </LinearLayout>
+    
+    
+    
+    
+    <ScrollView android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+   
+     <LinearLayout
+         android:paddingTop="30dip"
+        android:id="@+id/layout_1_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical"
+        
+         >
+    
+    
+  <ImageView 
+      
+       android:id="@+id/imgview_logo_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+      
+      
+      />
+  
+      <com.equest.CustTextView
+            
+            android:id="@+id/tv_please_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+             dah:cust_font="Oxygen_Light"
+            android:text="Please login to continue" 
+            android:layout_marginTop="20dip"
+            style="@style/PleaseTextViewLogin"/>
+  
+  
+
+      
+   
+          
+          <LinearLayout
+        android:paddingTop="30dip"
+        android:id="@+id/layout_2_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal" >
+
+        
+
+        <EditText
+           
+            android:id="@+id/et_email_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/email_icon"
+            android:hint="abc@example.com"
+            
+           android:background="@drawable/email_field"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="10dip"
+            android:drawablePadding="10dip"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_3_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        
+        android:layout_margin="20dip"
+         >
+
+
+        <EditText
+            android:id="@+id/et_password_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/password_icon"
+            android:hint="Password"
+            
+            android:inputType="textPassword"
+            android:drawablePadding="14dip"
+            android:paddingLeft="10dip"
+            android:background="@drawable/password_field"
+             />
+    </LinearLayout>
+
+    
+    
+    
+     <com.equest.CustomButtonView
+        
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        style="@style/LoginButtonLogin"
+        android:background="@drawable/selector_answer_text_buttons"
+        dah:cust_font="Oxygen_Bold"
+        android:text="Login"    
+        android:layout_margin="20dip"
+        
+        />
+    
+</LinearLayout>
+</ScrollView>
+
+</LinearLayout>

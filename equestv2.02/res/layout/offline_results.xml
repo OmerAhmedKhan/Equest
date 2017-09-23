@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dah="http://schemas.android.com/apk/res/com.equest"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linear_linear_title_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.equest.CustTextView
+            android:id="@+id/offline_results_text_title"
+            style="@style/HeadingQuestionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="OFFLINE RESULTS"
+            android:visibility="visible"
+            dah:cust_font="Oxygen_Bold" >
+        </com.equest.CustTextView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_offline_result_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:gravity="center"
+        android:text="RESULT"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/tv_offline_result_Pass_or_Fail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dip"
+        android:gravity="center"
+        android:text="Pass"
+        android:textColor="@color/red"
+        android:textSize="20sp"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/scroll_offline_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" 
+        android:visibility="visible">
+
+        <LinearLayout
+            android:id="@+id/scroll_linear_offline_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <com.equest.CustTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"
+                android:text="Total Score"
+                android:textSize="20dip"
+                dah:cust_font="Oxygen_Light" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <com.equest.CustTextView
+                    android:id="@+id/tv_offline_result_firstpointA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="5"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="60dip"
+                    dah:cust_font="Oxygen_Light" />
+
+                <com.equest.CustTextView
+                    android:id="@+id/tv_offline_result_firstpointB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="/10"
+                    android:textSize="20dip"
+                    dah:cust_font="Oxygen_Light" />
+            </LinearLayout>
+
+            
+            <com.equest.CustTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"
+                android:text="Easy Score"
+                android:textSize="20dip"
+                dah:cust_font="Oxygen_Light" />
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <com.equest.CustTextView
+                    android:id="@+id/tv_offline_result_secondpointA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="5"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="60dip"
+                    dah:cust_font="Oxygen_Light" />
+
+                <com.equest.CustTextView
+                    android:id="@+id/tv_offline_result_secondpointB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="/10"
+                    android:textSize="20dip"
+                    dah:cust_font="Oxygen_Light" />
+            </LinearLayout>
+            
+            
+            <com.equest.CustTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"
+                android:text="Medium Score"
+                android:textSize="20dip"
+                dah:cust_font="Oxygen_Light" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <com.equest.CustTextView
+                    android:id="@+id/tv_offline_result_thirdpointA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="5"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="60dip"
+                    dah:cust_font="Oxygen_Light" />
+
+                <com.equest.CustTextView
+                    android:id="@+id/tv_offline_result_thirdpointB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="/10"
+                    android:textSize="20dip"
+                    dah:cust_font="Oxygen_Light" />
+            </LinearLayout>
+            
+            
+            <com.equest.CustTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"
+                android:text="Hard Score"
+                android:textSize="20dip"
+                dah:cust_font="Oxygen_Light" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <com.equest.CustTextView
+                    android:id="@+id/tv_offline_result_fourthpointA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="5"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="60dip"
+                    dah:cust_font="Oxygen_Light" />
+
+                <com.equest.CustTextView
+                    android:id="@+id/tv_offline_result_fourthpointB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="/10"
+                    android:textSize="20dip"
+                    dah:cust_font="Oxygen_Light" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+    
+    <!-- TABLET VIEW -->
+    
+    <LinearLayout
+        android:id="@+id/tablet_scroll_linear_offline_result"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:weightSum="4" >
+        
+        <LinearLayout 
+             android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_weight="1"
+        android:orientation="vertical"
+            >
+
+            <com.equest.CustTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"
+                android:text="Total Score"
+                android:textSize="20dip"
+                dah:cust_font="Oxygen_Light" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:gravity="center" 
+                android:orientation="horizontal" >
+
+                <com.equest.CustTextView
+                    android:id="@+id/tablet_tv_offline_result_firstpointA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="5"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="60dip"
+                    dah:cust_font="Oxygen_Light" />
+
+                <com.equest.CustTextView
+                    android:id="@+id/tablet_tv_offline_result_firstpointB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="/10"
+                    android:textSize="20dip"
+                    dah:cust_font="Oxygen_Light" />   
+                    
+                    
+                    
+                    
+            </LinearLayout>
+
+            </LinearLayout>
+            
+        <LinearLayout 
+             android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="1"
+            >
+            
+            <com.equest.CustTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"
+                android:text="Easy Score"
+                android:textSize="20dip"
+                dah:cust_font="Oxygen_Light" />
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <com.equest.CustTextView
+                    android:id="@+id/tablet_tv_offline_result_secondpointA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="5"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="60dip"
+                    dah:cust_font="Oxygen_Light" />
+
+                <com.equest.CustTextView
+                    android:id="@+id/tablet_tv_offline_result_secondpointB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="/10"
+                    android:textSize="20dip"
+                    dah:cust_font="Oxygen_Light" />
+            </LinearLayout>
+            
+            </LinearLayout>
+
+        <LinearLayout 
+             android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="1"
+            >
+            
+            <com.equest.CustTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"
+                android:text="Medium Score"
+                android:textSize="20dip"
+                dah:cust_font="Oxygen_Light" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <com.equest.CustTextView
+                    android:id="@+id/tablet_tv_offline_result_thirdpointA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="5"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="60dip"
+                    dah:cust_font="Oxygen_Light" />
+
+                <com.equest.CustTextView
+                    android:id="@+id/tablet_tv_offline_result_thirdpointB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="/10"
+                    android:textSize="20dip"
+                    dah:cust_font="Oxygen_Light" />
+            </LinearLayout>
+            
+           </LinearLayout> 
+           
+         <LinearLayout 
+             android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_weight="1"
+            >
+            
+            <com.equest.CustTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dip"
+                android:paddingBottom="10dip"
+                android:text="Hard Score"
+                android:textSize="20dip"
+                dah:cust_font="Oxygen_Light" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal" >
+
+                <com.equest.CustTextView
+                    android:id="@+id/tablet_tv_offline_result_fourthpointA"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="5"
+                    android:textColor="@android:color/holo_orange_dark"
+                    android:textSize="60dip"
+                    dah:cust_font="Oxygen_Light" />
+
+                <com.equest.CustTextView
+                    android:id="@+id/tablet_tv_offline_result_fourthpointB"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dip"
+                    android:paddingBottom="10dip"
+                    android:text="/10"
+                    android:textSize="20dip"
+                    dah:cust_font="Oxygen_Light" />
+            </LinearLayout>
+            
+             </LinearLayout> 
+        </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,113 @@
+package com.equest;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.equest.network.URLs;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+
+public class getAllUserLog extends Activity {
+    ArrayList<severityScoreEntity> userLog;
+    List<NameValuePair> serviceCall;
+    severityScoreEntity score;
+    JSONObject body;
+    JSONObject section;
+    JSONObject subject;
+    JSONObject severityLevel;
+    Context context;
+    String serviceResponse;
+    public getAllUserLog()
+	{
+		
+		
+	}
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+		//add layout
+		context=this;
+		userLog=new ArrayList<severityScoreEntity>();
+		serviceCall=new ArrayList<NameValuePair>();
+		
+	}
+	private class UserLog extends AsyncTask<Void, Void, JSONObject> {
+		private ProgressDialog progressDialog;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progressDialog = new ProgressDialog(context);
+			progressDialog.setCancelable(false);
+			progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog.setMessage("Loading...");
+			progressDialog.show();
+		}
+
+		@Override
+		protected JSONObject doInBackground(Void... arg0) {
+			serviceCall.add(new BasicNameValuePair("functionName",
+					"report_second_activity"));
+			serviceCall.add(new BasicNameValuePair("email", "abc@example.com"));
+			serviceCall.add(new BasicNameValuePair("password", "1234"));
+			serviceResponse = Network.makeHttpRequest(context,
+					URLs.Base_URL, "POST", serviceCall);
+			JSONObject section;
+			try {
+				Log.e("serviceResponse", serviceResponse);
+				JSONObject body = new JSONObject(serviceResponse);
+				body = body.getJSONObject("body");
+				section = body.getJSONObject("sections");
+
+				Log.e("section.names()", section.names().toString());
+
+				JSONArray keys = section.names();
+
+				for (int index = 0; index < keys.length(); index++) {
+					JSONObject subject=section.getJSONObject(keys.getString(index));
+					JSONObject severity=subject.getJSONObject("easy");
+					score.setEasy(keys.getString(index),severity.getString("correct_questions"),severity.getString("total_questions"));
+					score.setEasy(keys.getString(index),severity.getString("correct_questions"),severity.getString("total_questions"));
+					score.setEasy(keys.getString(index),severity.getString("correct_questions"),severity.getString("total_questions"));
+					severity=subject.getJSONObject("medium");
+					score.setMedium(keys.getString(index),severity.getString("correct_questions"),severity.getString("total_questions"));
+					score.setMedium(keys.getString(index),severity.getString("correct_questions"),severity.getString("total_questions"));
+					score.setMedium(keys.getString(index),severity.getString("correct_questions"),severity.getString("total_questions"));
+					severity=subject.getJSONObject("hard");
+					score.setHard(keys.getString(index),severity.getString("correct_questions"),severity.getString("total_questions"));
+					score.setHard(keys.getString(index),severity.getString("correct_questions"),severity.getString("total_questions"));
+					score.setHard(keys.getString(index),severity.getString("correct_questions"),severity.getString("total_questions"));
+					userLog.add(score);
+				}
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject Questions) {
+			progressDialog.dismiss();
+			Log.e("user LOG",userLog.toString());
+		}
+	}
+
+	
+}

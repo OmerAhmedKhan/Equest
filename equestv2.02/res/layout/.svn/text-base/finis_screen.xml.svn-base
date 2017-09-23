@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scroll_instructions"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/bg"
+     >
+    
+    
+    
+     <LinearLayout
+        android:id="@+id/linear_title_finish"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/finish_title"
+            style="@style/HeadingQuestionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="FINISH"
+            android:visibility="visible" >
+        </TextView>
+    
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/scroll_linear_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="100dip"
+         >
+
+        <TextView
+            android:id="@+id/tv_instructions_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Thank You!"
+            android:textSize="40sp" />
+
+            <Button
+                android:id="@+id/btn_finish_test"
+                style="@style/OkButtonInstruction"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dip"
+                
+                android:background="@drawable/selector_answer_text_buttons"
+                android:text="FINISH" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    
+    
+    <LinearLayout
+                android:id="@+id/linear_linear_title_question_image"
+                android:layout_width="match_parent"
+                android:layout_height="40dip" 
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@android:color/holo_orange_dark"
+               >
+
+                <TextView
+                    android:id="@+id/question_image_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Question 2/20"
+                    
+                    
+                    style="@style/HeadingQuestionText"
+                    android:visibility="visible" >
+                </TextView>
+                
+                
+                   
+                
+            </LinearLayout>
+    
+    
+      <LinearLayout
+               
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" 
+                android:orientation="vertical"
+               
+                android:paddingTop="15dip"
+                
+                
+                >
+             <TextView
+                    android:id="@+id/tv_question_image_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="10:52"
+                    
+                    style="@style/TimerMinutesQuestionText" />
+                   
+            </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingBottom="10dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="10dip" >
+
+       <LinearLayout 
+                   
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="2"
+                    android:paddingBottom="70dip"
+                    
+                    >
+                    
+                      <TextView
+                    android:id="@+id/tv_question_img_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   style="@style/QuestionDescriptionQuestionText"
+                    android:layout_weight="1"
+                    android:text="What is your name...................................................................." />
+                
+                <ImageView 
+                    
+                      android:id="@+id/img_question_img_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:background="@drawable/question_placeholder"
+                    android:src="@drawable/error"
+                    android:layout_weight="1"
+                    android:visibility="gone"
+                   
+                    
+                    />
+                </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <ImageButton
+                android:id="@+id/img_answer_1_img_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dip"
+                android:src="@drawable/ic_launcher" />
+
+            <ImageButton
+                android:id="@+id/img_answer_2_img_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dip"
+                android:src="@drawable/ic_launcher" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2" >
+
+            <ImageButton
+                android:id="@+id/img_answer_3_img_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dip"
+                android:src="@drawable/ic_launcher" />
+
+            <ImageButton
+                android:id="@+id/img_answer_4_img_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="10dip"
+                android:src="@drawable/ic_launcher" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/btn_next_question_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@null"
+                android:layout_marginTop="40dip"
+                android:src="@drawable/selector_next_button"/>
+
+            <ImageButton
+                android:id="@+id/btn_previous_question_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:background="@null"
+                android:layout_marginTop="40dip"
+                 android:src="@drawable/selector_prev_buttons" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

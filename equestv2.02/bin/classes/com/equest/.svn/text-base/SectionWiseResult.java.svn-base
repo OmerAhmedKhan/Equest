@@ -1,0 +1,239 @@
+package com.equest;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ListView;
+
+import com.equest.network.URLs;
+
+public class SectionWiseResult extends Activity {
+	
+	
+	//define variables
+	
+	ListView list;
+	Button my_button_getdata;
+	ArrayList<ReviewEntity> sectionwise;
+	
+	
+	private static final String TAG_body="body";
+	private static final String TAG_sections="sections";
+	private static final String TAG_english="english";
+	private static final String TAG_easy="easy";
+	private static final String TAG_medium="medium";
+	private static final String TAG_hard="hard";
+	
+	
+	private static final String TAG_maths="maths";
+	private static final String TAG_iq="iq";
+	
+	
+	
+	
+	
+	
+
+	private static final String TAG_correct_questions="correct_questions";
+	private static final String TAG_total_questions="total_questions";
+	
+	
+	JSONObject jarray=null;
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.activity_main_result_listview);
+		sectionwise = new ArrayList<ReviewEntity>();
+
+		my_button_getdata = (Button) findViewById(R.id.getdata);
+		my_button_getdata.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				sectionwise = new ArrayList<ReviewEntity>();
+				DetailViewReslt obj=new DetailViewReslt();
+				obj.execute();
+
+			}
+		});
+
+	}
+	
+	private class DetailViewReslt extends AsyncTask<String,String, JSONObject>{
+		
+		private ProgressDialog progressdialog;
+		
+		
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+			progressdialog = new ProgressDialog(SectionWiseResult.this);
+			progressdialog.setMessage("Getting Detailed Result ...");
+			progressdialog.setIndeterminate(false);
+			progressdialog.setCancelable(true);
+			progressdialog.show();
+		}
+		
+		
+		@Override
+		protected JSONObject doInBackground(String... args) {
+
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("email", "abc@example.com"));
+			params.add(new BasicNameValuePair("password", "1234"));
+			params.add(new BasicNameValuePair("functionName",
+					"report_second_activity"));
+
+
+			String jsonResponse = Network.makeHttpRequest(
+					SectionWiseResult.this, URLs.Base_URL, "POST", params);
+			              //Log.d("Shireen", ""+ jsonResponse);
+			JSONObject json = null;
+			// Getting JSON from URL
+			try {
+				json = new JSONObject(jsonResponse);// jParser.getJSONFromUrl(URL,"POST",
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return json;
+		}
+		
+		@Override
+		protected void onPostExecute(JSONObject json) {
+			progressdialog.dismiss();
+			if(json == null)
+				return;
+
+			try {
+				jarray = json.getJSONObject(TAG_body).getJSONObject(TAG_sections);
+				
+				//for (int i = 0; i < jarray.length(); i++) {
+					
+				
+				   // JSONObject questionObj = jarray.getJSONObject(i);
+					
+					// Storing JSON item in a Variable
+					
+					/** ENGLISH**/
+				    JSONObject section_english =jarray.getJSONObject(TAG_english);
+				    
+				    /** ENGLISH EASY **/
+				    JSONObject EE_severityObj = jarray.getJSONObject(TAG_easy);
+				    JSONObject EE_correct_questions = jarray.getJSONObject(TAG_correct_questions);
+				    JSONObject EE_total_questions = jarray.getJSONObject(TAG_total_questions);
+
+				    /** ENGLISH Medium **/
+				    JSONObject EM_severityObj = jarray.getJSONObject(TAG_medium);
+				    JSONObject EM_correct_questions = jarray.getJSONObject(TAG_correct_questions);
+				    JSONObject EM_total_questions = jarray.getJSONObject(TAG_total_questions);
+					
+				    /** ENGLISH Hard **/
+				    
+				    JSONObject EH_severity = jarray.getJSONObject(TAG_hard);
+				    JSONObject EH_correct_questions = jarray.getJSONObject(TAG_correct_questions);
+				    JSONObject EH_total_questions = jarray.getJSONObject(TAG_total_questions);
+					
+				    /** ENGLISH ENDS **/
+				    
+				    
+				    /** MATHS **/ 
+				    
+				    JSONObject section_maths=jarray.getJSONObject(TAG_maths);
+				    /** MATHS EASY **/
+				    JSONObject ME_severityObj = jarray.getJSONObject(TAG_easy);
+				    JSONObject ME_correct_questions = jarray.getJSONObject(TAG_correct_questions);
+				    JSONObject ME_total_questions = jarray.getJSONObject(TAG_total_questions);
+				    
+				    /** MATHS MEDIUM **/
+				    
+				    JSONObject MM_severityObj = jarray.getJSONObject(TAG_medium);
+				    JSONObject MM_correct_questions = jarray.getJSONObject(TAG_correct_questions);
+				    JSONObject MM_total_questions = jarray.getJSONObject(TAG_total_questions);
+				    
+				    
+				    
+				    /** MATHS HARD **/
+				    
+				    
+				    JSONObject MH_severityObj = jarray.getJSONObject(TAG_hard);
+				    JSONObject MH_correct_questions = jarray.getJSONObject(TAG_correct_questions);
+				    JSONObject MH_total_questions = jarray.getJSONObject(TAG_total_questions);
+				    
+				    
+				    /**                           MATHS END             **/
+				    
+				    /** IQ BEGINS **/
+				    
+				    JSONObject section_IQ=jarray.getJSONObject(TAG_iq);
+				    
+				    
+				    /** IQ EASY **/
+				    
+				    
+				    JSONObject IQE_severityObj = jarray.getJSONObject(TAG_easy);
+				    JSONObject IQE_correct_questions = jarray.getJSONObject(TAG_correct_questions);
+				    JSONObject IQE_total_questions = jarray.getJSONObject(TAG_total_questions);
+
+				     
+				     
+				    
+				    /** IQ MEDIUM **/
+				    
+				    JSONObject IQM_severityObj = jarray.getJSONObject(TAG_medium);
+				    JSONObject IQM_correct_questions = jarray.getJSONObject(TAG_correct_questions);
+				    JSONObject IQM_total_questions = jarray.getJSONObject(TAG_total_questions);
+
+				    
+				    
+				    
+				    /** IQ HARD **/
+				    
+				    JSONObject IQH_severityObj = jarray.getJSONObject(TAG_hard);
+				    JSONObject IQH_correct_questions = jarray.getJSONObject(TAG_correct_questions);
+				    JSONObject IQH_total_questions = jarray.getJSONObject(TAG_total_questions);
+
+				     
+				    ReviewEntity obj = new ReviewEntity();
+					
+					
+//					obj.setAnswer_opt(answerDescription);
+//					obj.setIs_correct(correct);
+//					obj.setQuestion_description(question);
+//
+//					questionslist.add(obj);
+				    
+		
+		
+		
+	
+	
+	
+	
+	
+			} catch(Exception e) {
+				
+			}
+		}}
+	
+	
+	
+	
+	
+
+} // SectionWiseResult ends
+
+

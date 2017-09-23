@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+   	<declare-styleable name="CustTextView">
+   		<!-- ** This enum is tightly coupled with the enum in FontManager! ** -->
+   		<!-- ** Make sure their orders stay the same ** -->
+   		<attr name="cust_font" >
+   			<enum name="Oxygen_Bold" value="0"/>
+   			<enum name="Oxygen_Light" value="1"/>
+   			<enum name="Oxygen_Regular" value="2"/>
+   			<enum name="HELVETICANEUELTPRO_HV" value="3"/>
+   			<enum name="HELVETICANEUELTPRO_TH" value="4"/>
+   			<enum name="HELVETICANEUELTPRO_THEX" value="5"/>
+   		</attr>
+   	</declare-styleable>
+   	
+   	
+   	   	<declare-styleable name="CustEditView">
+   		<!-- ** This enum is tightly coupled with the enum in FontManager! ** -->
+   		<!-- ** Make sure their orders stay the same ** -->
+   		<attr name="cust_edit_font" >
+   			<enum name="Oxygen_Bold" value="0"/>
+   			<enum name="Oxygen_Light" value="1"/>
+   			<enum name="Oxygen_Regular" value="2"/>
+   			<enum name="HELVETICANEUELTPRO_HV" value="3"/>
+   			<enum name="HELVETICANEUELTPRO_TH" value="4"/>
+   			<enum name="HELVETICANEUELTPRO_THEX" value="5"/>
+   		</attr>
+   	</declare-styleable>
+   	
+   	   		<declare-styleable name="CustButtonView">
+   		<!-- ** This enum is tightly coupled with the enum in FontManager! ** -->
+   		<!-- ** Make sure their orders stay the same ** -->
+   		<attr name="cust_btn_font" >
+   			<enum name="Oxygen_Bold" value="0"/>
+   			<enum name="Oxygen_Light" value="1"/>
+   			<enum name="Oxygen_Regular" value="2"/>
+   			<enum name="HELVETICANEUELTPRO_HV" value="3"/>
+   			<enum name="HELVETICANEUELTPRO_TH" value="4"/>
+   			<enum name="HELVETICANEUELTPRO_THEX" value="5"/>
+   		</attr>
+   	</declare-styleable>
+   	
+</resources>

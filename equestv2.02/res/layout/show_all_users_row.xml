@@ -1,0 +1,23 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+ xmlns:dah="http://schemas.android.com/apk/res/com.equest"
+     >
+    
+ <com.equest.CustTextView
+    android:id="@+id/textView2"
+    style="@style/CandidatenamesListOfCandidates"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawableLeft="@drawable/ic_user"
+    android:drawablePadding="10dp"
+    android:gravity="center_vertical"
+    	dah:cust_font="Oxygen_Light"
+    android:padding="10dp"
+    android:background="@drawable/selector"
+     
+	android:layout_margin="10dp"
+    android:text="here" />
+
+
+</RelativeLayout>

@@ -1,0 +1,196 @@
+package com.equest;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
+
+import com.constants.constants;
+import com.equest.network.URLs;
+
+public class Questions_Activity extends Activity implements OnClickListener {
+	static final String URL = "http://localhost/library/models/api.php";
+	private Context context;
+	JSONObject JSON;
+	JSONObject Questions, question_no;
+	JSONObject body;
+	JSONObject Answers, answer_no, answer_detail;
+	List<NameValuePair> POST = new ArrayList<NameValuePair>();
+	ArrayList<QuestionAnswers> QuestionAnswersPairs;
+	String pairQA;
+	
+	 String[] answers;
+	 
+	 QuestionAnswers questionAndAnswer=new QuestionAnswers();
+
+	
+	TextView question=(TextView) findViewById(R.id.tv_question_text_description);
+	Button btn_answer_1=(Button) findViewById(R.id.btn_answer_option_1);
+	Button btn_answer_2=(Button) findViewById(R.id.btn_answer_option_2);
+	Button btn_answer_3=(Button) findViewById(R.id.btn_answer_option_3);
+	Button btn_answer_4=(Button) findViewById(R.id.btn_answer_option_4);
+	
+	Button btn_next=(Button) findViewById(R.id.btn_next_question_text);
+	Button btn_prev=(Button) findViewById(R.id.btn_previous_question_text);
+	
+	
+	
+	
+	
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.instructions);
+		
+	;
+		
+		
+		QuestionAnswersPairs = new ArrayList<QuestionAnswers>();
+		context = this;
+		POST.add(new BasicNameValuePair("functionName", "question_pairs"));
+		new displayQuestionAnswers().execute();
+		
+		
+		questionAndAnswer=
+		question.setText(questionAndAnswer.retQuestion());
+		
+		
+	}
+	
+	
+	
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch (v.getId()) {
+		case R.id.btn_answer_option_1:
+		{
+			answers[constants.index]="inter here";
+			break;
+		}
+		case R.id.btn_answer_option_2:
+		{
+			break;
+		}
+		case R.id.btn_answer_option_3:
+		{
+			break;
+		}
+		case R.id.btn_answer_option_4:
+		{
+			break;
+		}
+		default:
+			break;
+		}
+		
+	}
+	
+
+	// public Questions_Activity()
+	// {
+	// context=this;
+	// POST.add(new BasicNameValuePair("functionName", "question_pairs"));
+	//
+	// }
+	private class displayQuestionAnswers extends
+			AsyncTask<Void, Void, JSONObject> {
+		private ProgressDialog progressDialog;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			progressDialog = new ProgressDialog(context);
+			progressDialog.setCancelable(false);
+			progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+			progressDialog.setCanceledOnTouchOutside(false);
+			progressDialog.setMessage("Loading...");
+			progressDialog.show();
+		}
+
+		@Override
+		protected JSONObject doInBackground(Void... params) {
+
+			try {
+				pairQA = Network.makeHttpRequest(context, URLs.Base_URL,
+						"POST", POST).toString();
+				JSON = new JSONObject(pairQA);
+				Log.e("json", pairQA);
+				body = JSON.getJSONObject("body");
+				int count = Integer.parseInt(body.getString("total_question"));
+				String isImageAnswer;
+				Questions = body.getJSONObject("questions");
+				
+				for (int i = 0; i < count; i++) {
+
+					question_no = Questions
+							.getJSONObject(String.valueOf(i + 1));
+					QuestionAnswers QA = new QuestionAnswers();
+					QuestionAnswers.setTotalQuestions(count);
+					QA.setQuestionId(question_no.getString("id"));
+					QA.setQuestions(
+							question_no.getString("question"),
+							question_no.getString("is_image") );
+					Answers = question_no.getJSONObject("answers");
+					answer_no = Answers.getJSONObject("answers");
+					QuestionAnswers.setCountAnswerOptions(answer_no.length());
+					for (int j = 0; j < answer_no.length(); j++) {
+						answer_detail = answer_no.getJSONObject(String
+								.valueOf(j + 1));
+						Log.e("image answer",""+answer_detail.getString("image") +"\n");
+					/*	if(answer_detail.getString("image").equals("null"))
+						{
+							isImageAnswer="0";
+						}
+						else
+						{
+							isImageAnswer="1";
+						}
+						Log.e("isImageAnswer",""+isImageAnswer+"\n");*/
+						QA.setAnswerId(answer_detail.getString("id"));
+						QA.setAnswers(answer_detail.getString("option"),
+								answer_detail.getString("is_correct"),
+								answer_detail.getString("image").equals("null") ? "0"
+										: "1");
+					}
+					// answer_detail=answer_no.
+					QuestionAnswersPairs.add(QA);
+
+				}
+
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return Questions;
+
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject Questions) {
+
+			if (progressDialog != null && progressDialog.isShowing())
+				progressDialog.dismiss();
+			Log.e("QuestionAnswersPairs", "" + QuestionAnswersPairs.toString());
+			super.onPostExecute(Questions);
+		}
+
+	}
+
+	
+}

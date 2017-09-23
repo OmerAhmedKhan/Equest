@@ -1,0 +1,361 @@
+package com.equest;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.DialogInterface.OnClickListener;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import com.equest.network.URLs;
+import com.equest.utilities.InternetCheckerMainActivity;
+
+public class showAllUsers extends Activity {
+	
+	ListView list;
+	EditText search;
+	Button Buttnogetdata;
+	TextView noMatch;
+	ArrayList<AllUsersEntity> usersList;
+
+	//private static String url = "http://192.175.0.138/interns/library/models/api.php";
+
+	private static final String TAG_body = "body";
+	//private static final String TAG_userid = "user_id";
+	private static final String TAG_userfirstname = "user_fname";
+	private static final String TAG_userlastname = "user_lname";
+	private static final String TAG_user_information = "user_information";
+
+	JSONArray jArray = null;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+
+		setContentView(R.layout.result_listview_sections);
+		usersList = new ArrayList<AllUsersEntity>();
+		
+		noMatch=(TextView) findViewById(R.id.nomatch);
+		list=(ListView) findViewById(R.id.listusers);
+		search =(EditText) findViewById(R.id.edtTxt);
+		//usersList = new ArrayList<AllUsersEntity>();
+		new ViewUsersList().execute();
+		
+		list.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
+					long arg3) {
+			
+				final Dialog dialog = new Dialog(showAllUsers.this);
+				dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+				dialog.setContentView(R.layout.dialog_box);
+//				dialog.setTitle("Title...");
+				TextView text = (TextView) dialog.findViewById(R.id.text);
+				
+				text.setText("Please select any one to view");
+				ImageView image = (ImageView) dialog.findViewById(R.id.image);
+				image.setImageResource(R.drawable.logo_dialogbox);
+				
+				TextView dialogtextviewone = (TextView) dialog.findViewById(R.id.dialogButtonResults);
+				TextView dialogtextviewtwo=(TextView) dialog.findViewById(R.id.dialogButtonTestReview);
+				
+				
+				
+				
+				dialogtextviewtwo.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						
+						Intent ourIntent = new Intent(showAllUsers.this,MainActivityResult.class);
+						startActivity(ourIntent);
+						
+					}//onClick
+
+			
+				});
+				
+				
+				dialogtextviewone.setOnClickListener(new View.OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+					
+						//add alis activity 
+						
+					}//onClick
+
+			
+				});
+				
+				
+				dialog.show();	
+			}
+		});
+
+		
+	
+		
+		
+		
+		
+		
+		search.addTextChangedListener(new TextWatcher() {
+			
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,int count)
+			{
+				int textlength = search.length();
+			    ArrayList<AllUsersEntity> array_sort = new ArrayList<AllUsersEntity>();
+			    
+			    for (int i = 0; i < usersList.size(); i++) 
+			    		{
+		
+ String username = usersList.get(i).getUser_fname() + " "  +usersList.get(i).getUser_lname() + "  " 	 ;
+		
+ 
+ 
+ //+ " " +( (AllUsersEntity) list.getItemAtPosition(i) ).getUser_lname();			     
+			       if(username.contains(search.getText().toString())) 
+			       	{
+			    	   array_sort.add(usersList.get(i));
+			       	}//if ends
+			     			     		     			     
+			    		}//for ends
+			    
+			    
+			    list.setAdapter(new TempListAdapter(array_sort));
+			    	    if (textlength == 0) 
+			    	    {
+			    	    
+			    	    	list.setAdapter(new TempListAdapter(usersList));
+			    	    }//IF ENDS
+			    	    
+			    	    if (list.getCount() > 0)
+			    	    	  findViewById(R.id.nomatch).setVisibility(View.GONE);
+			    	    else {
+			    	        findViewById(R.id.nomatch).setVisibility(View.VISIBLE);
+			    	   }//else ends
+				
+			}//afterTextChanged ends
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// NOTHING 
+				
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// NOTHING 
+				
+			}
+
+		
+		});
+		
+		
+		Buttnogetdata = (Button) findViewById(R.id.finish_button);
+		Buttnogetdata.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				finish();
+				
+//				usersList = new ArrayList<AllUsersEntity>();
+//				new ViewUsersList().execute();
+
+			}
+		});
+
+	}
+	
+
+	
+	
+
+
+	private class ViewUsersList extends AsyncTask<String, String, JSONObject> {
+		private ProgressDialog progressDialog;
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+
+			progressDialog = new ProgressDialog(showAllUsers.this);
+			progressDialog.setMessage("Getting User list please wait ...");
+			progressDialog.setIndeterminate(false);
+			progressDialog.setCancelable(true);
+			progressDialog.show();
+		}
+
+		@Override
+		protected JSONObject doInBackground(String... args) {
+
+			List<NameValuePair> params = new ArrayList<NameValuePair>();
+
+			params.add(new BasicNameValuePair("functionName",
+					"getAllUserLog"));
+
+
+			String jsonResponse = Network.makeHttpRequest(
+					showAllUsers.this, URLs.Base_URL, "POST", params);
+			
+			
+			JSONObject json = null;
+		
+			try {
+				json = new JSONObject(jsonResponse);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return json;
+		}
+
+		@Override
+		protected void onPostExecute(JSONObject json) {
+			progressDialog.dismiss();
+			if(json == null)
+				return;
+			
+			try {
+				jArray =  json.getJSONObject(TAG_body).getJSONArray(
+						TAG_user_information);
+				
+						
+				for (int i = 0; i < jArray.length(); i++) {
+					JSONObject jobj = jArray.getJSONObject(i);
+				
+					String userFirstname = jobj.getString(TAG_userfirstname);
+					String userLasttname = jobj.getString(TAG_userlastname);
+				
+					
+					AllUsersEntity obj = new AllUsersEntity();
+					
+					obj.setUser_fname(userFirstname);
+					obj.setUser_lname(userLasttname);
+				//	obj.setUser_id(userId);
+
+
+					usersList.add(obj);
+				}
+
+				list = (ListView) findViewById(R.id.listusers);
+				TempListAdapter adapter = new TempListAdapter(usersList);
+				list.setAdapter(adapter);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+
+		}
+	}
+
+	public class TempListAdapter extends BaseAdapter {
+		private ArrayList<AllUsersEntity> userArrayList;
+
+		public TempListAdapter(ArrayList<AllUsersEntity> arrayList) {
+			this.userArrayList = arrayList;
+		}
+
+		public int getCount() {
+			return userArrayList.size();
+		}
+
+		public Object getItem(int position) {
+			return userArrayList.get(position);
+		}
+
+		public long getItemId(int position) {
+			return 0;
+		}
+
+		//
+		public View getView(int position, View convertView, ViewGroup parent) {
+			LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			View row;
+			ViewHolder viewHolder;
+			if (convertView == null) {
+				row = inflater.inflate(R.layout.show_all_users_row, null);
+				viewHolder = new ViewHolder();
+				
+				
+			
+				viewHolder.lstname = (TextView) row
+						.findViewById(R.id.textView2);
+				
+				
+				row.setTag(viewHolder);
+			}
+			
+			else {
+				row = convertView;
+				viewHolder = (ViewHolder) convertView.getTag();
+			}
+
+
+			
+			viewHolder.lstname
+			.setText(userArrayList.get(position).getUser_fname()  + " " + userArrayList.get(position).getUser_lname());
+			
+			
+
+
+			return row;
+		}
+
+		
+		
+		
+	
+			    
+		class ViewHolder {
+			//TextView userid;
+			TextView frstname;
+			TextView lstname;
+			
+			
+			
+		}
+		
+		
+		
+		
+		
+	}// adapter ends
+
+	
+	
+
+	/********************************************************************************************************/
+	
+	
+	
+	
+}//

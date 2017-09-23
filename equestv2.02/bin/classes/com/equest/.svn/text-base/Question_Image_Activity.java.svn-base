@@ -1,0 +1,46 @@
+package com.equest;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+public class Question_Image_Activity extends Activity {
+	
+	
+	Intent intendedFromQuestionTextActivity;
+	Bundle dataFromQuestionActivity;
+	
+	String question;
+	String[] answers;
+	
+	TextView question_description;
+	ImageView question_images;
+	ImageButton[] answer_btn_images;
+	
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+	
+		setContentView(R.layout.questions_layout_img);
+		
+		
+		
+	
+	}
+	
+	
+	public void initializer()
+	{
+		question_description=(TextView) findViewById(R.id.tv_question_img_description);
+		question_images=(ImageView) findViewById(R.id.img_question_img_description);
+		answer_btn_images[0]=(ImageButton) findViewById(R.id.img_answer_1_img_description);
+		answer_btn_images[1]=(ImageButton) findViewById(R.id.img_answer_2_img_description);
+		answer_btn_images[2]=(ImageButton) findViewById(R.id.img_answer_3_img_description);
+		answer_btn_images[3]=(ImageButton) findViewById(R.id.img_answer_4_img_description);
+	}
+	
+}

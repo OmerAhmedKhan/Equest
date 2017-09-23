@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     xmlns:dah="http://schemas.android.com/apk/res/com.equest"
+    android:id="@+id/scroll_instructions"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/linear_title_finish"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <com.equest.CustTextView
+            android:id="@+id/finish_title"
+            style="@style/HeadingQuestionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            dah:cust_font="Oxygen_Bold"
+            android:text="FINISH"
+            android:visibility="visible" >
+        </com.equest.CustTextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/scroll_linear_instruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dip"
+        android:orientation="vertical" >
+
+         <com.equest.CustTextView
+            android:id="@+id/tv_instructions_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+             dah:cust_font="Oxygen_Light"
+            android:text="Thank You!"
+            android:textSize="40sp" />
+        
+        
+        
+        
+        
+    </LinearLayout>
+    
+    
+    <LinearLayout 
+       
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+        >
+        
+         <com.equest.CustomButtonView
+        android:id="@+id/btn_finish_test"
+        style="@style/OkButtonInstruction"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         dah:cust_font="Oxygen_Regular"
+        android:background="@drawable/selector_answer_text_buttons"
+        android:text="FINISH"
+        android:layout_marginTop="175dip"
+        android:layout_marginLeft="20dip"
+        android:layout_marginRight="20dip"
+         />
+        
+    </LinearLayout>
+
+   
+
+</LinearLayout>

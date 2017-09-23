@@ -1,0 +1,65 @@
+package com.equest;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class severityScoreEntity {
+	Map<String,Map> severity;
+	Map<String,String> subjectSeverity;
+	public severityScoreEntity()
+	{
+		severity=new HashMap<String, Map>();
+		subjectSeverity=new HashMap<String, String>();
+	
+	}
+	public void setEasy(String subject,String correct,String total)
+	{
+		subjectSeverity.put("easyCorrect",correct);
+		subjectSeverity.put("easyTotal",total);
+		severity.put(subject, subjectSeverity);
+	}
+	public void setMedium(String subject,String correct,String total)
+	{
+		subjectSeverity.put("mediumCorrect",correct);
+		subjectSeverity.put("mediumTotal",total);
+		severity.put(subject, subjectSeverity);
+	}
+
+	public void setHard(String subject,String correct,String total)
+	{
+		subjectSeverity.put("hardCorrect",correct);
+		subjectSeverity.put("hardTotal",total);
+		severity.put(subject, subjectSeverity);
+	}
+	public String retEasyCorrect(String subject)
+	{
+		return (String) severity.get(subject).get("easyCorrect");
+	}
+	public String retEasyTotal(String subject)
+	{
+		return (String) severity.get(subject).get("easyTotal");
+	}
+	public String retMediumCorrect(String subject)
+	{
+		return (String) severity.get(subject).get("mediumCorrect");
+	}
+	public String retMediumTotal(String subject)
+	{
+		return (String) severity.get(subject).get("mediumTotal");
+	}
+	public String retHardCorrect(String subject)
+	{
+		return (String) severity.get(subject).get("hardCorrect");
+	}
+	public String retHardTotal(String subject)
+	{
+		return (String) severity.get(subject).get("hardTotal");
+	}
+	@Override
+	public String toString() {
+		return "severityScoreEntity [severity=" + severity
+				+ ", subjectSeverity=" + subjectSeverity + "]";
+	}
+
+
+}

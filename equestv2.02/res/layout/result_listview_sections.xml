@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:dah="http://schemas.android.com/apk/res/com.equest"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg" >
+
+    <LinearLayout
+        android:id="@+id/scroll_relative_linear_title_question_text"
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="@android:color/holo_orange_dark"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+    	    <com.equest.CustTextView
+            android:id="@+id/imgview_question_text_title"
+            style="@style/HeadingTestReview"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="LIST OF CANDIDATES"
+        	dah:cust_font="Oxygen_Bold"
+            android:visibility="visible" />
+        
+        
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/candidate_txtview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="" />
+
+     <com.equest.CustEditView
+        android:id="@+id/edtTxt"
+        style="@style/SearchBarListOfCandidates"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/candidate_txtview"
+        android:layout_margin="20dp"
+        android:background="@drawable/search_bar"
+        android:drawableLeft="@drawable/magnifying_glass"
+        android:gravity="center_vertical"
+        dah:cust_font="Oxygen_Light"
+        android:hint="         Search Candidate"
+        android:paddingLeft="10dp" />
+
+    <com.equest.CustTextView
+        android:id="@+id/nomatch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="No match found"
+         dah:cust_font="Oxygen_Bold"
+        android:visibility="invisible" />
+
+    <Button
+        android:id="@+id/finish_button"
+        style="@style/OkButtonListOfCandidates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="23dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:background="@drawable/btn_blue_normal"
+        android:text="Ok"
+        android:visibility="gone" />
+
+    <ListView
+        android:id="@+id/listusers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/finish_button"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/edtTxt"
+        android:listSelector="@android:color/transparent"
+        android:paddingTop="10dp" />
+
+</RelativeLayout>

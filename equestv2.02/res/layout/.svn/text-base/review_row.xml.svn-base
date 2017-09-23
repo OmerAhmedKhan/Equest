@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
+    
+   
+    
+
+    <TextView
+        android:paddingTop="10dp"
+        android:id="@+id/txtview_question"
+        style="@style/TestReviewPageFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Q:  this is the question. it is dynamic " />
+
+    <TextView
+        android:id="@+id/txtview_AttemptedAnswer"
+        style="@style/TestReviewPageFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtview_question"
+        android:paddingTop="@dimen/review_row_padding"
+        android:paddingBottom="20dp"
+        android:text="Attempted Answer" />
+
+    <TextView
+        android:id="@+id/txtview_Answer"
+        style="@style/TestReviewPageFont"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtview_AttemptedAnswer"
+        android:maxWidth="@dimen/review_row_maxWidth"
+        android:paddingTop="@dimen/review_row_padding"
+        android:text="This is the dynamic answer" />
+
+    <ImageView
+        android:id="@+id/imageView_iscorrect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/txtview_Answer"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="56dp"
+        android:paddingBottom="15dp" />
+
+    <ImageView
+        android:id="@+id/imageView_answerimg_present"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/txtview_Answer"
+        android:layout_marginLeft="47dp"
+        android:paddingBottom="30dp"
+        android:src="@drawable/ic_launcher" />
+
+</RelativeLayout>
