@@ -17,8 +17,8 @@ TBD
 TBD
 
 ## Contributors
-* [Omer Ahmed Khan](https://www.linkedin.com/in/omerahmedkhan/) - Developeer
-* [Munir Ahmed Javed](ADD you portfolio/LinkedIn Link Here) - UI/UX
+* [Omer Ahmed Khan](https://www.linkedin.com/in/omerahmedkhan/) - Developer
+* [Munir Ahmed Javed](https://www.linkedin.com/in/munir-ahmed-javed) - UI Designer
 
 ## License
 
